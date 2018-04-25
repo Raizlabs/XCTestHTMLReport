@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Summary: HTML
+struct Summary
 {
     private let filename = "action_TestSummaries.plist"
 
@@ -42,10 +42,12 @@ struct Summary: HTML
             }
         }
     }
+}
 
-    // PRAGMA MARK: - HTML
-
-    var htmlTemplate = HTMLTemplates.index
+extension Summary: HTML {
+    var htmlTemplate: String {
+        return HTMLTemplates.index
+    }
 
     var htmlPlaceholderValues: [String: String] {
         return [
@@ -58,3 +60,8 @@ struct Summary: HTML
     }
 }
 
+extension Summary: JUnitRepresentable {
+    var junit: JUnit {
+        return JUnit(summary: self)
+    }
+}
